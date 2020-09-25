@@ -24,17 +24,19 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.primaryColor,
-      body: Column(
-        children: [
-          Image.asset(
-            AssetsHelper.logo,
-          ),
-          Text(
-            'اكلة     \nلذيذة\n      وشهية ',
-            style: GoogleFonts.abrilFatface(
-                color: AppTheme.fontColor, fontSize: 30),
-          )
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            Image.asset(
+              AssetsHelper.logo1,
+            ),
+            Text(
+              'اكلة     \nلذيذة\n      وشهية ',
+              style: GoogleFonts.abrilFatface(
+                  color: AppTheme.fontColor, fontSize: 30),
+            )
+          ],
+        ),
       ),
     );
   }
