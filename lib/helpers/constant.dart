@@ -1,3 +1,10 @@
 class Constants {
-  static final List<String> menuTitile = ['hello', 'abdo', 'ahmed'];
+  static List<String> categories = [
+    'الاطباق الرئيسية',
+    'الشوربات والسلطات',
+    'الحلويات',
+    'المشروبات',
+    'المشروبات الساخنة',
+    'المشويات'
+  ];
 }

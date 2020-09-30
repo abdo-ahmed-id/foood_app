@@ -1,15 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foood_app/helpers/app_theme.dart';
-import 'package:foood_app/helpers/assets_helper.dart';
+import 'package:foood_app/helpers/constant.dart';
 import 'package:foood_app/helpers/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: Drawer(
+      drawer: Drawer(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -21,7 +28,7 @@ class HomePage extends StatelessWidget {
                 style: GoogleFonts.cairo(color: AppTheme.fontColor),
               ),
               onTap: () {
-                Navigator.pushNamed(context, Routes.homePage);
+                Navigator.pushReplacementNamed(context, Routes.homePage);
               },
             ),
             ListTile(
@@ -30,7 +37,7 @@ class HomePage extends StatelessWidget {
                 style: GoogleFonts.cairo(color: AppTheme.fontColor),
               ),
               onTap: () {
-                Navigator.pushReplacementNamed(context, Routes.categoriesPage);
+                Navigator.pushNamed(context, Routes.categoriesPage);
               },
             ),
             ListTile(
@@ -74,78 +81,38 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            flex: 7,
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: PageView(
-                children: [
-                  Column(
-                    children: [
-                      Image.asset(AssetsHelper.image_1),
-                      Text(
-                        'BreakFast',
-                        style: GoogleFonts.cairo(
-                            fontSize: 20,
-                            letterSpacing: 10,
-                            color: AppTheme.fontColor,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Image.asset(AssetsHelper.image_3),
-                      Text(
-                        'Lunch',
-                        style: GoogleFonts.cairo(
-                            fontSize: 20,
-                            letterSpacing: 10,
-                            color: AppTheme.fontColor,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Image.asset(AssetsHelper.image_2),
-                      Text(
-                        'Dinner',
-                        style: GoogleFonts.cairo(
-                            fontSize: 20,
-                            letterSpacing: 10,
-                            color: AppTheme.fontColor,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Divider(
-            height: 10,
-            color: Colors.grey,
-            thickness: 5,
-          ),
-          Expanded(
-            flex: 2,
             child: ListView.builder(
-              padding: EdgeInsets.all(10),
+              itemCount: Constants.categories.length,
               scrollDirection: Axis.horizontal,
-              itemCount: 7,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 10,
-                    child: Text(
-                      'HELLO',
-                      style: TextStyle(letterSpacing: 10),
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      shape: BoxShape.rectangle,
-                      color: AppTheme.primaryColor,
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = index;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          Constants.categories[index],
+                          style: GoogleFonts.cairo(
+                              color: selectedIndex == index
+                                  ? AppTheme.fontColor
+                                  : Colors.grey,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Container(
+                          height: 3,
+                          width: 30,
+                          color: selectedIndex == index
+                              ? AppTheme.primaryColor
+                              : Colors.grey,
+                        )
+                      ],
                     ),
                   ),
                 );
@@ -153,7 +120,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 7,
+            flex: 10,
             child: Text('hello'),
           )
         ],
