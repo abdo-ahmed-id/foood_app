@@ -1,5 +1,5 @@
 class AssetsHelper {
-  static String logo1 = 'assets/images/image_1.jpg';
+  static String logoLogin = 'assets/images/logo.jpg';
   static String image_1 = 'assets/images/image_3.jpg';
   static String image_2 = 'assets/images/image_4.jpg';
   static String image_3 = 'assets/images/image_5.jpg';
@@ -9,4 +9,6 @@ class AssetsHelper {
   static String drinks = 'assets/images/drinks.jpg';
   static String hotDrinks = 'assets/images/hot_drinks.jpg';
   static String badFood = 'assets/images/المشويات.jpg';
+  static String facebookLogo = 'assets/images/facebook-512.png';
+  static String instgramLogo = 'assets/images/Instagram-512.png';
 }
