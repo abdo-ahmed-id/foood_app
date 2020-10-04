@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:foood_app/helpers/app_theme.dart';
 
 class AppWidget extends StatelessWidget {
   @override
@@ -18,6 +19,7 @@ class AppWidget extends StatelessWidget {
       supportedLocales: [
         Locale('ar'),
       ],
+      theme: ThemeData(primaryColor: AppTheme.primaryColor),
     );
   }
 }
