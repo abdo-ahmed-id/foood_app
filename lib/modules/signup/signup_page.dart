@@ -1,14 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:foood_app/helpers/app_theme.dart';
-import 'package:foood_app/helpers/routes.dart';
 import 'package:foood_app/helpers/widget.dart';
 import 'package:foood_app/services/auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatelessWidget {
-  GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+class SignUpPage extends StatelessWidget {
+  GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   String _email;
   String _password;
   final _auth = Auth();
@@ -16,7 +14,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
-        key: globalKey,
+        key: _globalKey,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -26,7 +24,7 @@ class LoginPage extends StatelessWidget {
                 height: 60,
               ),
               Text(
-                'تسجيل الدخول',
+                'اشاء حساب',
                 style: GoogleFonts.cairo(
                     color: AppTheme.fontColor,
                     fontSize: 20,
@@ -51,7 +49,7 @@ class LoginPage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: CustomTextField(
                     hint: 'كلمة المرور',
-                    icon: Icon(Icons.lock),
+                    icon: Icon(Icons.lock_outline),
                     onChange: (value) {
                       _password = value;
                     },
@@ -61,17 +59,18 @@ class LoginPage extends StatelessWidget {
               ),
               RaisedButton(
                 child: Text(
-                  'تسجيل الدخول',
+                  'انشاء حساب',
                   style: GoogleFonts.cairo(
                     color: Colors.white,
                   ),
                 ),
                 color: AppTheme.primaryColor,
                 onPressed: () async {
-                  globalKey.currentState.validate();
+                  _globalKey.currentState.validate();
+
                   print(_email);
                   print(_password);
-                  final userCredintial = await _auth.signIn(_email, _password);
+                  final userCredintial = await _auth.signUp(_email, _password);
                   return userCredintial.user.uid;
                 },
                 shape: RoundedRectangleBorder(
@@ -87,29 +86,6 @@ class LoginPage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Divider(
                   thickness: 2,
-                ),
-              ),
-              Center(
-                child: Text(
-                  'او',
-                  style: GoogleFonts.cairo(fontSize: 15),
-                ),
-              ),
-              RaisedButton(
-                child: Text(
-                  'انشاء حساب',
-                  style: GoogleFonts.cairo(
-                    color: Colors.white,
-                  ),
-                ),
-                color: AppTheme.primaryColor,
-                onPressed: () {
-                  Modular.to.pushReplacementNamed(Routes.signUpPage);
-                },
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(30),
-                  ),
                 ),
               ),
             ],
