@@ -20,7 +20,6 @@ class CustomTextField extends StatelessWidget {
         if (value.isEmpty) {
           return 'يجب ان تحتوي علس قيمة';
         }
-        return '';
       },
       onChanged: onChange,
       decoration: InputDecoration(
