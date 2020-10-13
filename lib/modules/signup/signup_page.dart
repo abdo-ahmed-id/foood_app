@@ -1,18 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:foood_app/helpers/app_theme.dart';
+import 'package:foood_app/helpers/routes.dart';
 import 'package:foood_app/helpers/widget.dart';
 import 'package:foood_app/services/auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SignUpPage extends StatelessWidget {
   GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+  final myKey = GlobalKey<ScaffoldState>();
   String _email;
   String _password;
   final _auth = Auth();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: myKey,
       body: Form(
         key: _globalKey,
         child: SingleChildScrollView(
@@ -66,12 +71,31 @@ class SignUpPage extends StatelessWidget {
                 ),
                 color: AppTheme.primaryColor,
                 onPressed: () async {
-                  _globalKey.currentState.validate();
-
-                  print(_email);
-                  print(_password);
-                  final userCredintial = await _auth.signUp(_email, _password);
-                  return userCredintial.user.uid;
+                  try {
+                    if (_globalKey.currentState.validate()) {
+                      print(_email);
+                      print(_password);
+                      User user = await _auth.signUp(_email, _password);
+                      if (user != null) {
+                        Modular.to.pushReplacementNamed(Routes.loginPage);
+                      }
+                    }
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'weak-password') {
+                      myKey.currentState.showSnackBar(SnackBar(
+                        content: Text('The password provided is too weak'),
+                      ));
+                    } else if (e.code == 'email-already-in-use') {
+                      myKey.currentState.showSnackBar(SnackBar(
+                        content:
+                            Text('The account already exists for that email.'),
+                      ));
+                    }
+                  } catch (e) {
+                    myKey.currentState.showSnackBar(SnackBar(
+                      content: Text(e),
+                    ));
+                  }
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(

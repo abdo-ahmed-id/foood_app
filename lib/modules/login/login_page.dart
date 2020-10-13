@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -9,12 +10,19 @@ import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatelessWidget {
   GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+
+  GlobalKey<ScaffoldState> loginKey = GlobalKey<ScaffoldState>();
+
   String _email;
+
   String _password;
+
   final _auth = Auth();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: loginKey,
       body: Form(
         key: globalKey,
         child: SingleChildScrollView(
@@ -68,11 +76,45 @@ class LoginPage extends StatelessWidget {
                 ),
                 color: AppTheme.primaryColor,
                 onPressed: () async {
-                  globalKey.currentState.validate();
-                  print(_email);
-                  print(_password);
-                  final userCredintial = await _auth.signIn(_email, _password);
-                  return userCredintial.user.uid;
+                  try {
+                    if (globalKey.currentState.validate()) {
+                      print(_email);
+                      print(_password);
+                      User user = await _auth.signIn(_email, _password);
+                      if (user != null) {
+                        Modular.to.pushReplacementNamed(Routes.homePage);
+                      } else {}
+                    }
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'user-not-found') {
+                      loginKey.currentState.showSnackBar(SnackBar(
+                        content: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              child: Text(
+                                'SignUp',
+                                style: GoogleFonts.cairo(
+                                    color: AppTheme.primaryColor),
+                              ),
+                              onTap: () {
+                                Modular.to.pushNamed(Routes.signUpPage);
+                              },
+                            ),
+                            Text('No user found for that email.'),
+                          ],
+                        ),
+                      ));
+                    } else if (e.code == 'wrong-password') {
+                      loginKey.currentState.showSnackBar(SnackBar(
+                        content: Text('Wrong password provided for that user.'),
+                      ));
+                    }
+                  } catch (e) {
+                    loginKey.currentState.showSnackBar(SnackBar(
+                      content: Text(e),
+                    ));
+                  }
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
@@ -112,6 +154,24 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MyButton(
+                      text: 'جوجل',
+                      onClick: () async {
+                        await _auth.signInWithGoogle();
+                        Modular.to.pushReplacementNamed(Routes.homePage);
+                      }),
+                  MyButton(
+                    text: 'فيسبوك',
+                    onClick: () async {
+                      await _auth.signInWithFaceBook();
+                      Modular.to.pushReplacementNamed(Routes.homePage);
+                    },
+                  ),
+                ],
+              )
             ],
           ),
         ),

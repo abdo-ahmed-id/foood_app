@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:foood_app/helpers/app_theme.dart';
 import 'package:foood_app/helpers/assets_helper.dart';
+import 'package:foood_app/helpers/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CategoriesPage extends StatelessWidget {
@@ -29,7 +31,9 @@ class CategoriesPage extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 leading: Image.asset(AssetsHelper.mainFood),
-                onTap: () {},
+                onTap: () {
+                  Modular.to.pushNamed(Routes.mainFoodPage);
+                },
               ),
             ),
             Divider(
@@ -47,7 +51,9 @@ class CategoriesPage extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 leading: Image.asset(AssetsHelper.soap),
-                onTap: () {},
+                onTap: () {
+                  Modular.to.pushNamed(Routes.saladPage);
+                },
               ),
             ),
             Divider(
@@ -65,7 +71,9 @@ class CategoriesPage extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 leading: Image.asset(AssetsHelper.sweet),
-                onTap: () {},
+                onTap: () {
+                  Modular.to.pushNamed(Routes.sweetsPage);
+                },
               ),
             ),
             Divider(
@@ -83,7 +91,9 @@ class CategoriesPage extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 leading: Image.asset(AssetsHelper.drinks),
-                onTap: () {},
+                onTap: () {
+                  Modular.to.pushNamed(Routes.drinksPage);
+                },
               ),
             ),
             Divider(
@@ -101,7 +111,9 @@ class CategoriesPage extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 leading: Image.asset(AssetsHelper.hotDrinks),
-                onTap: () {},
+                onTap: () {
+                  Modular.to.pushNamed(Routes.hotDrinksPage);
+                },
               ),
             ),
             Divider(
@@ -119,7 +131,9 @@ class CategoriesPage extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 leading: Image.asset(AssetsHelper.badFood),
-                onTap: () {},
+                onTap: () {
+                  Modular.to.pushNamed(Routes.roastPage);
+                },
               ),
             ),
           ],

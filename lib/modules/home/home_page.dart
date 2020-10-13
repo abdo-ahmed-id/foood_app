@@ -1,7 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foood_app/helpers/app_theme.dart';
+import 'package:foood_app/modules/categories/drinks/drinks_page.dart';
+import 'package:foood_app/modules/categories/hot_drinks/drinks_page.dart';
+import 'package:foood_app/modules/categories/roast/roast_page.dart';
+import 'package:foood_app/modules/categories/soap_and_salad/soap_and_salad_page.dart';
+import 'package:foood_app/modules/categories/sweetes/sweetes_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'file:///D:/flutterApps/foood_app/lib/modules/categories/mainfood/mainfood_page.dart';
 
 import 'drawer.dart';
 
@@ -17,7 +23,8 @@ class HomePage extends StatelessWidget {
           centerTitle: true,
           title: Text(
             'FOOD',
-            style: GoogleFonts.cairo(letterSpacing: 10, fontSize: 25),
+            style: GoogleFonts.cairo(
+                letterSpacing: 10, fontSize: 25, color: Colors.white),
           ),
           bottom: TabBar(
             isScrollable: true,
@@ -60,30 +67,12 @@ class HomePage extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            Text(
-              'الرئسية',
-              style: GoogleFonts.cairo(color: AppTheme.fontColor),
-            ),
-            Text(
-              'الرئسية',
-              style: GoogleFonts.cairo(color: AppTheme.fontColor),
-            ),
-            Text(
-              'الرئسية',
-              style: GoogleFonts.cairo(color: AppTheme.fontColor),
-            ),
-            Text(
-              'الرئسية',
-              style: GoogleFonts.cairo(color: AppTheme.fontColor),
-            ),
-            Text(
-              'الرئسية',
-              style: GoogleFonts.cairo(color: AppTheme.fontColor),
-            ),
-            Text(
-              'الرئسية',
-              style: GoogleFonts.cairo(color: AppTheme.fontColor),
-            ),
+            MainFoodPage(),
+            SaladPage(),
+            SweetsPage(),
+            DrinksPage(),
+            HotDrinksPage(),
+            RoastPage()
           ],
         ),
       ),

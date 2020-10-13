@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'app_theme.dart';
 
@@ -20,7 +21,6 @@ class CustomTextField extends StatelessWidget {
         if (value.isEmpty) {
           return 'يجب ان تحتوي علس قيمة';
         }
-        return '';
       },
       onChanged: onChange,
       decoration: InputDecoration(
@@ -34,6 +34,32 @@ class CustomTextField extends StatelessWidget {
           borderRadius: BorderRadius.all(
             Radius.circular(25),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class MyButton extends StatelessWidget {
+  String text;
+  Function onClick;
+
+  MyButton({Key key, this.text, this.onClick}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      child: Text(
+        text,
+        style: GoogleFonts.cairo(
+          color: Colors.white,
+        ),
+      ),
+      color: AppTheme.primaryColor,
+      onPressed: onClick,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(30),
         ),
       ),
     );

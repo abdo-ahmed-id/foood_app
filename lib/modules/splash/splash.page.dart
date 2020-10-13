@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:foood_app/helpers/app_theme.dart';
@@ -10,12 +11,14 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+
   @override
   void initState() {
     super.initState();
     Future.delayed(
       Duration(seconds: 4),
-      () => Modular.to.pushReplacementNamed(Routes.loginPage),
+      () => Modular.to.pushReplacementNamed(Routes.homePage),
     );
   }
 
