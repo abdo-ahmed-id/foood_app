@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:foood_app/helpers/app_theme.dart';
@@ -78,7 +77,7 @@ class LoginPage extends StatelessWidget {
                       final userCredintial =
                           await _auth.signIn(_email, _password);
                       Modular.to.pushReplacementNamed(Routes.homePage);
-                      return userCredintial.user.uid;
+                      return userCredintial.uid;
                     }
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
