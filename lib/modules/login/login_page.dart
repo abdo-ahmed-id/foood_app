@@ -10,15 +10,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatelessWidget {
   GlobalKey<FormState> globalKey = GlobalKey<FormState>();
-
   GlobalKey<ScaffoldState> loginKey = GlobalKey<ScaffoldState>();
-
   String _email;
-
   String _password;
-
   final _auth = Auth();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,10 +75,10 @@ class LoginPage extends StatelessWidget {
                     if (globalKey.currentState.validate()) {
                       print(_email);
                       print(_password);
-                      User user = await _auth.signIn(_email, _password);
-                      if (user != null) {
-                        Modular.to.pushReplacementNamed(Routes.homePage);
-                      } else {}
+                      final userCredintial =
+                          await _auth.signIn(_email, _password);
+                      Modular.to.pushReplacementNamed(Routes.homePage);
+                      return userCredintial.user.uid;
                     }
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
@@ -154,24 +149,6 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  MyButton(
-                      text: 'جوجل',
-                      onClick: () async {
-                        await _auth.signInWithGoogle();
-                        Modular.to.pushReplacementNamed(Routes.homePage);
-                      }),
-                  MyButton(
-                    text: 'فيسبوك',
-                    onClick: () async {
-                      await _auth.signInWithFaceBook();
-                      Modular.to.pushReplacementNamed(Routes.homePage);
-                    },
-                  ),
-                ],
-              )
             ],
           ),
         ),

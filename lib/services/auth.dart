@@ -3,6 +3,12 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Auth {
+  /* // final _auth = FirebaseAuth.instance.authStateChanges().listen((User user) {
+  //   if (user == null) {
+  //     print('signOut');
+  //   }
+  //   print('signIn');
+  // });*/
   final auth = FirebaseAuth.instance;
 
   Future<User> signUp(String email, String password) async {

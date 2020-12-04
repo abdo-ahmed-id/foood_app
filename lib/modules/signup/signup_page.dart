@@ -75,10 +75,10 @@ class SignUpPage extends StatelessWidget {
                     if (_globalKey.currentState.validate()) {
                       print(_email);
                       print(_password);
-                      User user = await _auth.signUp(_email, _password);
-                      if (user != null) {
-                        Modular.to.pushReplacementNamed(Routes.loginPage);
-                      }
+                      final userCredintial =
+                          await _auth.signUp(_email, _password);
+                      Modular.to.pushReplacementNamed(Routes.loginPage);
+                      return userCredintial.user.uid;
                     }
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {
