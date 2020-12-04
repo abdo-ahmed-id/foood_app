@@ -83,7 +83,7 @@ class SignUpPage extends StatelessWidget {
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {
                       myKey.currentState.showSnackBar(SnackBar(
-                        content: Text('The password provided is too weak'),
+                        content: Text('The  password provided is too weak'),
                       ));
                     } else if (e.code == 'email-already-in-use') {
                       myKey.currentState.showSnackBar(SnackBar(
