@@ -11,4 +11,5 @@ class AssetsHelper {
   static String badFood = 'assets/images/المشويات.jpg';
   static String facebookLogo = 'assets/images/facebook-512.png';
   static String instgramLogo = 'assets/images/Instagram-512.png';
+  var mainFoodList = [];
 }

@@ -31,8 +31,8 @@ class HomePage extends StatelessWidget {
             labelPadding:
                 EdgeInsets.only(left: 18, right: 18, top: 0, bottom: 20),
             unselectedLabelColor: Colors.red,
-            labelColor: Colors.black,
-            indicatorColor: Colors.white,
+            labelColor: Colors.white,
+            indicatorColor: Colors.black,
             indicatorSize: TabBarIndicatorSize.tab,
             indicatorWeight: 3,
             tabs: [

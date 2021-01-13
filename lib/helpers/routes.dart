@@ -9,4 +9,6 @@ class Routes {
   static String drinksPage = '/drinks';
   static String hotDrinksPage = '/hotDrinks';
   static String roastPage = '/roast';
+  static String searchPage = '/search';
+  static String componentPage = '/component';
 }

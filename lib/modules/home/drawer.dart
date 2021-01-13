@@ -68,24 +68,28 @@ class DrawerPage extends StatelessWidget {
               'البحث',
               style: GoogleFonts.cairo(color: AppTheme.fontColor),
             ),
-            onTap: () {},
+            onTap: () {
+              Modular.to.pushNamed(Routes.searchPage);
+            },
           ),
           ListTile(
             title: Text(
               'المكونات',
               style: GoogleFonts.cairo(color: AppTheme.fontColor),
             ),
-            onTap: () {},
+            onTap: () {
+              Modular.to.pushNamed(Routes.componentPage);
+            },
           ),
           ListTile(
             title: Text(
               'تسجيل الخروج',
               style: GoogleFonts.cairo(color: AppTheme.fontColor),
             ),
-            onTap: () async {
+            /*onTap: () async {
               await googleSignIn.signOut();
               Modular.to.pushReplacementNamed(Routes.loginPage);
-            },
+            },*/
           ),
         ],
       ),

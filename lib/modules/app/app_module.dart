@@ -4,11 +4,14 @@ import 'package:foood_app/helpers/routes.dart';
 import 'package:foood_app/modules/categories/categories_module.dart';
 import 'package:foood_app/modules/categories/drinks/drinks_module.dart';
 import 'package:foood_app/modules/categories/hot_drinks/drinks_module.dart';
+import 'package:foood_app/modules/categories/mainfood/mainfood_module.dart';
 import 'package:foood_app/modules/categories/roast/roast_module.dart';
 import 'package:foood_app/modules/categories/soap_and_salad/soap_and_salad_module.dart';
 import 'package:foood_app/modules/categories/sweetes/sweets_module.dart';
+import 'package:foood_app/modules/component/component_module.dart';
 import 'package:foood_app/modules/home/home_module.dart';
 import 'package:foood_app/modules/login/login_module.dart';
+import 'package:foood_app/modules/search/search_module.dart';
 import 'package:foood_app/modules/signup/signup_module.dart';
 import 'package:foood_app/modules/splash/splash.module.dart';
 
@@ -33,5 +36,8 @@ class AppModule extends MainModule {
         ModularRouter(Routes.drinksPage, module: DrinksModule()),
         ModularRouter(Routes.hotDrinksPage, module: HotDrinksModule()),
         ModularRouter(Routes.roastPage, module: RoastModule()),
+        ModularRouter(Routes.mainFoodPage, module: MainFoodModule()),
+        ModularRouter(Routes.searchPage, module: SearchModule()),
+        ModularRouter(Routes.componentPage, module: ComponentModule()),
       ];
 }
