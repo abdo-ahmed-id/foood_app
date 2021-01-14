@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:foood_app/helpers/app_theme.dart';
+import 'package:foood_app/helpers/assets_helper.dart';
+import 'package:foood_app/helpers/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SearchPage extends StatefulWidget {
@@ -36,70 +40,110 @@ class _SearchPageState extends State<SearchPage> {
         ),
         centerTitle: true,
       ),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 20,
-          ),
-          Text(
-            'اظهر النتائج حسب:    ',
-            style: GoogleFonts.cairo(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          Column(
-            children: [
-              DropdownButton(
-                items: kinds
-                    .map(
-                      (kind) => DropdownMenuItem(
-                        value: kind,
-                        child: Text(kind),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Text(
+              '$selectedKind-$selectedChef ',
+              style: GoogleFonts.cairo(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.fontColor),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'اظهر النتائج حسب:    ',
+                  style: GoogleFonts.cairo(
+                      fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                Column(
+                  children: [
+                    DropdownButton(
+                      items: kinds
+                          .map(
+                            (kind) => DropdownMenuItem(
+                              value: kind,
+                              child: Text(kind),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (val) {
+                        setState(() {
+                          selectedKind = val;
+                        });
+                      },
+                      value: selectedKind,
+                      style: TextStyle(color: AppTheme.fontColor, fontSize: 16),
+                      dropdownColor: Colors.black,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    DropdownButton(
+                      items: chef
+                          .map(
+                            (kind) => DropdownMenuItem(
+                              value: kind,
+                              child: Text(kind),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (val) {
+                        setState(() {
+                          selectedChef = val;
+                        });
+                      },
+                      value: selectedChef,
+                      style: TextStyle(color: AppTheme.fontColor, fontSize: 16),
+                      dropdownColor: Colors.black,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 7,
+                itemBuilder: (BuildContext context, int index) => InkWell(
+                  onTap: () {
+                    Modular.to.pushNamed(Routes.componentPage);
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'سلطة الفواكة',
+                        style: GoogleFonts.cairo(
+                            fontSize: 25,
+                            color: AppTheme.fontColor,
+                            fontWeight: FontWeight.bold),
                       ),
-                    )
-                    .toList(),
-                onChanged: (val) {
-                  setState(() {
-                    selectedKind = val;
-                  });
-                },
-                value: selectedKind,
-              ),
-              DropdownButton(
-                items: chef
-                    .map(
-                      (kind) => DropdownMenuItem(
-                        value: kind,
-                        child: Text(kind),
+                      SizedBox(
+                        height: 20,
                       ),
-                    )
-                    .toList(),
-                onChanged: (val) {
-                  setState(() {
-                    selectedChef = val;
-                  });
-                },
-                value: selectedChef,
+                      Container(
+                        child: Image.asset(AssetsHelper.soap),
+                        width: double.infinity,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Divider(
+                        height: 2,
+                        thickness: 5,
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              // DropdownButton(
-              //   items: kinds
-              //       .map(
-              //         (kind) => DropdownMenuItem(
-              //           value: kind,
-              //           child: Text(kind),
-              //         ),
-              //       )
-              //       .toList(),
-              //   onChanged: (val) {
-              //     setState(() {
-              //       selectedKind = val;
-              //     });
-              //   },
-              //   value: selectedKind,
-              // ),
-            ],
-          ),
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
